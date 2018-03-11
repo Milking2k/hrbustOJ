@@ -24,7 +24,7 @@ int main()
 		for (i = 0; i < n;)
 		{
 			int smlSum = a[i];
-			for (j = i+1;  abs(smlSum + a[j] - t) < abs(smlSum - t) ; ++j)
+			for (j = i+1;  abs(smlSum + a[j] - t) <= abs(smlSum - t) ; ++j)
 			{
 				smlSum += a[j];
 			}
