@@ -8,7 +8,7 @@ int main()
 	int n;
 	while(~scanf("%d", &n))
 	{
-		printf("%d\n", x+n);
+		printf("%u\n", n+x);
 	}
 	return 0;
 }
