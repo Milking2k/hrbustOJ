@@ -1,56 +1,49 @@
-#include <iostream>
-#include <cstdio>
-#include <algorithm>
-#include <cstring>
+#include <bits/stdc++.h>
 using namespace std;
+char zhu[1001][1001],fu[1001][1001],zuo[1001][1001];
 int main(int argc, char const *argv[])
 {
-	printf("1\n");
-	int x,y,z,n;
-	int a[1005];
-	int b[1005];
-	int c[1005];
-	memset(a,0,sizeof(a));
-	memset(b,0,sizeof(b));
-	memset(c,0,sizeof(c));
-	while(cin >> x >> y >> z >> n)
+	int X,Y,Z,n;
+	cin >> X >> Y >> Z >> n;
+	for (int i = 0; i < 1000; ++i)
 	{
-		int tx,ty,tz;
-		for (int i = 0; i < n; ++i)
+		for (int j = 0; j < 1000; ++j)
 		{
-			cin >> tx >> ty >> tz;
-			a[tx-1] = 1;
-			b[ty-1] = 1;
-			c[tz-1] = 1;
-		}
-
-		for (int i = y-1; i >= 0; --i)
-		{
-			for (int j = 0; j < x; ++j)
-			{
-
-				printf("  oo:%d %d %d:", a[j] , b[i] , c[0]);
-				if (a[j] && b[i] && c[0])
-				{
-					printf("x");
-				}else{
-					printf(".");
-				}
-			}
-			printf(" ");
-			for (int j = 0; j < z; ++j)
-			{
-				printf("  pp:%d %d %d", a[0] , b[i] , c[j]);
-
-				if (a[0] && b[i] && c[j])
-				{
-					printf("x");
-				}else{
-					printf(".");
-				}
-			}
-			printf("\n");
+			zhu[i][j] = '.';
+			fu[i][j] = '.';
+			zuo[i][j] = '.';
 		}
 	}
+	for (int i = 0; i < Y; ++i)
+	{
+		zhu[i][X] = 0;
+		zuo[i][Z] = 0;
+	}
+	for (int i = 0; i < Z; ++i)
+	{
+		fu[i][X] = 0;
+	}
+	int x,y,z;
+	for (int i = 0; i < n; ++i)
+	{
+		cin >> x >> y >> z;
+		zhu[Y-y][x-1] = 'x'; 
+		zuo[Y-y][z-1] = 'x'; 
+		 fu[z-1][x-1] = 'x'; 
+	}
+	for (int i = 0; i < Y; ++i)
+	{
+		printf(zhu[i]);
+		putchar(' ');
+		printf(zuo[i]);
+		putchar('\n');
+	}
+	putchar('\n');
+	for (int i = 0; i < Z; ++i)
+	{
+		puts(fu[i]);
+	}
+
+	
 	return 0;
 }

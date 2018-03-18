@@ -1,27 +1,32 @@
-#include <iostream>
-#include <cstdio>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
+
+long long foo(long long e, long long x, long long m)
+{
+	if (x==0)
+	{
+		return 0;
+	}
+	long long ret = 1;
+	while(x)
+	{
+		if (x & 1)
+		{
+			ret = ret * e % m;
+		}
+		e = e * e % m;
+		x >>= 1;
+	}
+	return ret;
+}
 int main(int argc, char const *argv[])
 {
-	long long int a,b,c,d,t;
-	while(cin >> a >> b >> c >> d >> t)
+	long long a,b,c,d,t;
+	while(scanf("%lld%lld%lld%lld%lld", &a, &b, &c, &d, &t) == 5)
 	{
-		
-		// cout << a << " " << b << " " << endl;
-		long long int ans = 1;
-		long long int cnt = 1;
-		for (int i = 0; i < c; ++i)
-		{
-			cnt = ((cnt%t) * ((a%t)*(b%t))%t)%t;
-			// cout << cnt << endl;
-		}
-		for (int i = 0; i < d; ++i)
-		{
-			ans = ((ans%t)*(cnt%t))%t;
-			// cout << ans << endl;
-		}
-		cout << ans%t << endl;
+		a %= t;
+		b %= t;
+		printf("%lld\n", foo(a*b%t, c*d, t));
 	}
 	return 0;
 }
