@@ -2,7 +2,8 @@
 using namespace std;
 int main(int argc, char const *argv[])
 {
-	priority_queue<int,vector<int>,greater<int>> q;
+	priority_queue<int,vector<int>,greater<int> >q;
+
     int n;
     while(cin >> n)
     {

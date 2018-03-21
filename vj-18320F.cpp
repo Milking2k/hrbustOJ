@@ -30,6 +30,10 @@ int main(int argc, char const *argv[])
 	{
 		int a,b,ans=0;
 		cin >> a>> b;
+		if (a>b)
+		{
+			swap(a,b);
+		}
 		for (int i = a; i <= b; ++i)
 		{
 			if (tofactor(i))
@@ -38,12 +42,7 @@ int main(int argc, char const *argv[])
 			}
 			
 		}
-		if (a<=120 && b>=120)
-		{
-			printf("%d\n", ans+1);
-		}else{
 			printf("%d\n", ans);
-		}
 	}
 	return 0;
 }
