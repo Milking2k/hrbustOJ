@@ -51,9 +51,9 @@ int bfs()
 		{// 第一次循环所有的路径、方向
 			if (e[cnt.x][i] != inf && book[i] == 0) 
 			{// 再次判断这条路是否可以走：包括遇到路障、边界、已经走过
-				cnt.x = i;
-				cnt.s += 1;
-				q.push(cnt);
+				adcnt.x = i;
+				adcnt.s += 1;
+				q.push(adcnt);
 				book[i] = 1;
 				//可以走这条路，更新这个点的长度、更新已经走过、并把它入队				
 			}
@@ -69,6 +69,43 @@ int bfs()
 
 
 }
+
+// void bfs(int i)
+// {
+// 	init();
+// 	int start,end;
+// 	cin >> start >> end;
+// 	struct node cnt;
+// 	struct node tail;
+// 	cnt.x = start;
+// 	cnt.s = 0;
+
+// 	queue<node>q;
+// 	q.push(cnt);
+// 	while(!q.empty())
+// 	{
+// 		cnt = q.front();
+// 		for (int i = 0; i < n; ++i)
+// 		{// all diriction
+// 			if (e[cnt.x][i] != inf && book[i] == 0)
+// 			{
+// 				tail.x = i;
+// 				tail.s = cnt.s + 1;
+// 				q.push(tail);
+// 				book[i] = 1;
+// 			}
+// 			if (cnt.x = end)
+// 			{
+// 				flag = 1;
+// 				break;
+// 			}
+// 		}
+// 		if(flag) break;
+// 		q.pop();
+// 	}
+
+// }
+
 int main(int argc, char const *argv[])
 {
 	
