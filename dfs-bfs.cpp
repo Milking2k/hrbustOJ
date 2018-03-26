@@ -70,41 +70,6 @@ int bfs()
 
 }
 
-// void bfs(int i)
-// {
-// 	init();
-// 	int start,end;
-// 	cin >> start >> end;
-// 	struct node cnt;
-// 	struct node tail;
-// 	cnt.x = start;
-// 	cnt.s = 0;
-
-// 	queue<node>q;
-// 	q.push(cnt);
-// 	while(!q.empty())
-// 	{
-// 		cnt = q.front();
-// 		for (int i = 0; i < n; ++i)
-// 		{// all diriction
-// 			if (e[cnt.x][i] != inf && book[i] == 0)
-// 			{
-// 				tail.x = i;
-// 				tail.s = cnt.s + 1;
-// 				q.push(tail);
-// 				book[i] = 1;
-// 			}
-// 			if (cnt.x = end)
-// 			{
-// 				flag = 1;
-// 				break;
-// 			}
-// 		}
-// 		if(flag) break;
-// 		q.pop();
-// 	}
-
-// }
 
 int main(int argc, char const *argv[])
 {
