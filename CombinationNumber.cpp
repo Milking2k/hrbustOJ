@@ -42,13 +42,25 @@ ll lucas(ll n,ll m,ll mod)
 
 int main(int argc, char const *argv[])
 {
-	int t;
-	cin >> t;
+	int t,k;
+	cin >> t >> k;
 	while(t--)
 	{
 		int n,m,p;
-		cin >> n >> m >> p; 
-		printf("%lld\n", lucas(n,m,p));
+		cin >> n >> m;
+		int count=0;
+		// printf("%lld\n", lucas(n,m,1000000007));
+		for (int i = 0; i <= n; ++i)
+		{
+			for (int j = 0; j <= min(i,m); ++j)
+			{
+				if (lucas(i,j,1000000007) % k == 0)
+				{
+					count++;
+				}
+			}
+		}
+		printf("%d\n", count);
 	}
 	return 0;
 }
