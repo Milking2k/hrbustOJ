@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\searchflight.o
+./release\bookticks.o
+./release\refund.o
+./release\addflight.o
+./release\searchticks.o
+./release\app_system.o
+./release\qrc_img.o
+./release\moc_mainwindow.o
+./release\moc_searchflight.o
+./release\moc_bookticks.o
+./release\moc_refund.o
+./release\moc_addflight.o
+./release\moc_searchticks.o
+);

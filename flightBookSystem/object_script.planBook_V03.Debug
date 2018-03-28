@@ -1,0 +1,17 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\searchflight.o
+./debug\bookticks.o
+./debug\refund.o
+./debug\addflight.o
+./debug\searchticks.o
+./debug\app_system.o
+./debug\qrc_img.o
+./debug\moc_mainwindow.o
+./debug\moc_searchflight.o
+./debug\moc_bookticks.o
+./debug\moc_refund.o
+./debug\moc_addflight.o
+./debug\moc_searchticks.o
+);
