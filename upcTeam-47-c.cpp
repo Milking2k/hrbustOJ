@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
+int len[300005];
+
 
 struct node
 {
@@ -7,29 +9,51 @@ struct node
 	node *next;
 };
 
-struct stack_lb
-{
-	node *bottom;
-	node *top;
-};
+typedef struct node st_lb;
+typedef st_lb* stlb;
+stlb bottom[300005];
 
-stack_lb head[300005];
+
+int free_lb(node *&t)
+{
+	node *cnt;
+    while (NULL != t)
+    {
+        cnt = t;
+        t = t->next;  // 下一个节点
+        free(cnt);
+    }
+
+    return 1;
+}
 
 int jia(int s,int v)
 {
+	if(len[s] == 0) bottom[s] = NULL;
 	node *q = (node*)malloc(sizeof(node));
 	q->val = v;
 	q->next= NULL;
-	head[s]->tail = q;
-
+	(bottom[s]+len[s])->next = q;
+	len[s]++;
+	free(q);
+	q->next = NULL;
 }
 int jian(int s)
 {
-
+	node *q = (node*)malloc(sizeof(node));
+	q = (bottom[s]+len[s]-1)->next;
+	len[s]--;
+	free(q);
+	q->next;
 }
 int bing(int s,int t)
 {
-
+	node *p = (node*)malloc(sizeof(node));
+	node *q = (node*)malloc(sizeof(node));
+	(bottom[s]+len[s])->next = bottom[t];
+	len[s] += len[t];
+	len[t];
+	free_lb(bottom[t]);
 }
 
 
