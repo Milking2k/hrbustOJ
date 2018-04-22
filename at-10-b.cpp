@@ -1,34 +1,47 @@
-#include<iostream>
+
+#include <bits/stdc++.h>
 using namespace std;
-long n,a[1<<17],b[1<<17],sum;
-main()
+typedef long long LL;
+const int maxn=1e5+7;
+ 
+LL a[maxn];
+LL stk[maxn];
+int top=0;
+ 
+int main()
 {
-	cin>>n;
-	for(int i=0;i<n;i++)
-	{
-		cin>>a[i];
-		sum+=a[i];
-		if(i)
-		{
-			b[i-1]=a[i]-a[i-1];
-		}
-	}
-	b[n-1]=a[0]-a[n-1];
-	long all=-~n*n/2;
-	if(sum%all)
-	{
-		cout<<"NO"<<endl;
-		return 0;
-	}
-	long k=sum/all;
-	for(int i=0;i<n;i++)
-	{
-		b[i]-=k;
-		if(b[i]>0||b[i]%n)
-		{
-			cout<<"NO"<<endl;
-			return 0;
-		}
-	}
-	cout<<"YES"<<endl;
+    int n;
+    scanf("%d",&n);
+    bool flag=true;
+    LL cnt=0;
+    for(int i=0;i<n;i++){
+        scanf("%lld",&a[i]);
+        cnt+=a[i];
+    }
+
+    LL sum;
+    top=0;
+
+    if(n&1)sum=(n+1)/2*n;
+    else sum=n/2*(n+1);
+    LL k=cnt/sum;
+    if((cnt%sum)!=0){
+        return puts("NO"), 0;
+    }
+
+    for(int i=1;i<n;i++){
+        stk[i-1]=a[i]-a[i-1];
+    }
+    stk[n-1]=a[0]-a[n-1];
+
+    bool ok=true;
+    for(int i=0;i<n;i++){
+        if(stk[i]>k||(stk[i]-k)%n){
+            ok=false;
+            break;
+        }
+    }
+    if(ok)puts("YES");
+    else puts("NO");
+    return 0;
 }
