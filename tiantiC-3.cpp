@@ -28,8 +28,9 @@ int main()
 	while(flag)
 	{
 		wcont=0,lcont=0;
-		for (int i = 0; i < 11; ++i,pos++)
+		for (int i = 0;  ; ++i,pos++)
 		{
+			if((wcont>=11 || lcont>=11) && abs(wcont-lcont)>=2) break;
 			if(emt[pos]=='E'){
 				flag=0;break;
 			}
@@ -44,8 +45,9 @@ int main()
 	while(flag)
 	{
 		wcont=0,lcont=0;
-		for (int i = 0; i < 21; ++i,pos++)
+		for (int i = 0;; ++i,pos++)
 		{
+			if((wcont>=21 || lcont>=21) && abs(wcont-lcont)>=2) break;
 			if(emt[pos]=='E'){
 				flag=0;break;
 			}
