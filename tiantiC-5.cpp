@@ -7,14 +7,12 @@ using namespace std;
 
 int p1,p2,p3;
 
-std::vector<string> emt[100];
 
 int main(int argc, char const *argv[])
 {
-	ios::sync_with_stdio(false);
-	string s;
-	while(cin>>p1>>p2>>p3)
+	while(~rddd(p1,p2,p3))
 	{
+		string s;
 		int top=0;
 		cin >> s;
 		int slen = s.length();
@@ -23,7 +21,7 @@ int main(int argc, char const *argv[])
 			if(s[i]=='-' && 0<i && i<slen)
 			{
 				int len = s[i+1]-s[i-1];
-				if(s[i-1] == s[i+1]) putchar('-');
+				if(s[i-1] >= s[i+1]) putchar('-');
 				else if((isalpha(s[i-1]) && isalpha(s[i+1])) || (isdigit(s[i-1]) && isdigit(s[i+1])))
 				{
 					if(p3==1){
@@ -58,6 +56,7 @@ int main(int argc, char const *argv[])
 				putchar(s[i]);
 			}
 		}
+		printf("\n");
 
 	}
 
