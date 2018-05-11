@@ -1,24 +1,10 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int main()
+
+int main(int argc, char const *argv[])
 {
-  string s;
-  while(getline(cin,s))
-  {
-    int cont = 1;
-    for(int i=s.length()-1;i>=0;i--)
-    {
-      if (cont && s[i] == '0'){
-        continue;
-      }else{
-        cont =0;
-      }
-      if (!cont)
-      {
-        cout << s[i];
-      }
-    }
-    cout << endl;
-  }
-  return 0;
+	std::vector<int > array(10);
+	array.clear();
+	cout << array[1] << endl;
+	return 0;
 }
