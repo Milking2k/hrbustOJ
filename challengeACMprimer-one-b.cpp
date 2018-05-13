@@ -1,90 +1,64 @@
-#include <iostream>
-#include <cstdio>
-#include <algorithm>
-#include <cstring>
-#include <cmath>
-#include <queue>
-using namespace std;
-
-int w,h;
-int stx,sty;
-int edx,edy;
-int emt[27][27];
-int dir1[4] = {1,0,0,-1};
-int dir2[4] = {0,1,-1,0};
-int vis[27][27];
-int ans;
-struct node
+#include<stdio.h>
+int dir[4][2]={{1,0},{-1,0},{0,1},{0,-1}};
+int ei,ej;
+int map[25][25];
+int w,h,steps,min;
+#define MAX 99999999
+void dfs(int si,int sj)
 {
-	int x,y;
-};
-queue<node> que;
+	int i,pi,pj;
+	if(steps>=10) return ;
 
-int check(int x, int y) {
-    if(emt[x][y] == 0 || emt[x][y] == 2 ) return 1; 
-    else if(emt[x][y] == -1 || emt[x][y] == 1) return 2;
-    else return 3;
-}
-
-void dfs(int x,int y, int t)
-{
-	if(x == edx && y == edy || t > 10) {
-        ans = (t < ans ? t : ans);
-    }
-    else {
-        for(int i = 0; i < 4; i++) {
-            int tx = x, ty = y;
-            if(check(tx + dir1[i], y + dir2[i]) != 2) {
-                while(check(tx + dir1[i], ty + dir2[i]) == 1) {
-                    tx += dir1[i], ty += dir2[i];
-                }
-                if(emt[tx + dir1[i]][ty + dir2[i]] == 1) {
-                    emt[tx + dir1[i]][ty + dir2[i]] = 0;
-                    t++;    
-                    dfs(tx, ty, t);
-                    --t;    
-                    emt[tx + dir1[i]][ty + dir2[i]] = 1;
-                }
-                else if(emt[tx + dir1[i]][ty + dir2[i]] == 3) {
-                    t++;
-                    dfs(tx + dir1[i], ty + dir2[i], t);
-                    --t;
-                }
-            }
-        }
-    }
-}
-
-int main(int argc, char const *argv[])
-{
-	while(~scanf("%d%d",&w,&h) && w && h)
-	{
-		// getchar();
-		// init
-		memset(vis,0,sizeof(vis));
-		ans=0;
-
-		for (int i = 0; i < h; ++i)
+	for(i=0;i<4;i++)
+	{		
+		pi=si,pj=sj;
+		while(1)
 		{
-			for (int j = 0; j < w; ++j)
+			pi+=dir[i][0];
+			pj+=dir[i][1];
+			if(pi<=0||pi>h||pj<=0||pj>w) break;//如果越界，选择其他方向
+			if(pi==ei&&pj==ej) 
 			{
-				scanf("%d",&emt[i][j]);				
-				if(emt[i][j]=='2') stx=i,sty=j;
-				if(emt[i][j]=='3') edx=i,edy=j;
+				steps++;
+				if(min>steps) min=steps;
+				steps--;
+				return;
 			}
-			// getchar();
-		}
-		for (int i =0; i < h; ++i)
-		{
-			for (int j = 0; j < w; ++j)
+			else if(map[pi][pj]==1)//如果遇到障碍物
 			{
-				printf("%d",emt[i][j]);			
+
+				if(pi-dir[i][0]!=si||pj-dir[i][1]!=sj)//如果不是起来
+				{
+					map[pi][pj]=0;//消除障碍物
+					steps++;//前进一步
+					dfs(pi-dir[i][0],pj-dir[i][1]);//递归查找该点到终点的最小步数
+					map[pi][pj]=1;//还原障碍物
+					steps--;//还原步数
+				}
+				break;
 			}
-			printf("\n");
 		}
-		dfs(stx,sty,0);
-		printf("%d\n", ans > 10 ? -1 : ans);
 	}
-
+}		
+int main()
+{
+	int si,sj,i,j;
+	while(scanf("%d%d",&w,&h)==2&&(w||h))
+	{
+		for(i=1;i<=h;i++)//输入并找到起点和终点
+			for(j=1;j<=w;j++)
+			{
+				scanf("%d",&map[i][j]);
+				if(map[i][j]==2)
+					si=i,sj=j;
+				else if(map[i][j]==3)
+					ei=i,ej=j;
+			}
+			min=MAX;//记录最小步数
+			steps=0;//初始化步数
+			dfs(si,sj);//深搜
+			if(min==MAX) puts("-1");
+			else printf("%d\n",min);
+	}
 	return 0;
 }
