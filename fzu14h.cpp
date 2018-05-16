@@ -68,7 +68,7 @@ int main()
         for(int i = 0; i < n; i++)
         {
             int pos = bin_search(a[i]);
-            dp[i] = (getsum(pos) + 1) % mod;//因为树状数组从1开始，所以这里的pos相当于pos-1
+            dp[i] = (getsum(pos) + 1) % mod;
             ans = (ans + dp[i]) % mod;
             update(pos + 1, dp[i]);
         }

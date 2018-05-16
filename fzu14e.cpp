@@ -10,22 +10,9 @@ struct DATA
 {
     int x, y, val;
 }d[MAX * MAX];
-
-bool cmp(DATA a, DATA b)
-{
-    return a.val < b.val;
-}
-
-void UF_set()
-{
-    for(int i = 0; i < MAX; i++)
-        fa[i] = i;
-}
-
-int Find(int x)
-{
-    return x == fa[x] ? x : fa[x] = Find(fa[x]);
-}
+bool cmp(DATA a, DATA b){return a.val < b.val;}
+void UF_set(){for(int i = 0; i < MAX; i++)fa[i] = i;}
+int Find(int x){return x == fa[x] ? x : fa[x] = Find(fa[x]);}
 
 void Union(int a, int b, int val)
 {   
@@ -60,7 +47,7 @@ int main()
                 {
                     d[cnt].x = i;
                     d[cnt].y = j;
-                    d[cnt ++].val = tmp;
+                    d[cnt++].val = tmp;
                 }
             }
         }
