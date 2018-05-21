@@ -4,7 +4,7 @@
 using namespace std;
 typedef long long LL;
 const LL MOD=1e9+7;
-
+ 
 const int maxn=1e4+7;
 LL qmod(LL a, LL b)
 {

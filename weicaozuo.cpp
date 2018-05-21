@@ -4,7 +4,6 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-
 	/* 
 	(1) 判断int型变量a是奇数还是偶数           
        a&1   = 0 偶数
@@ -52,7 +51,5 @@ int main(int argc, char const *argv[])
 		 等价于 x= a ^ b ^ x;
 	(16) x 的 相反数 表示为 (~x+1)
 	 */
-
-
 	return 0;
 }
