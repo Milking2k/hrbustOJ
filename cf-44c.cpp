@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-
 // --------------------
 ll emt[100007];
 int main()

@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <algorithm>
 using namespace std;
+
 int a[300003];
 int check(int array[],int low,int high,int target)
 {
