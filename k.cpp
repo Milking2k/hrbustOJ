@@ -1,24 +1,53 @@
-#include<bits/stdc++.h>
-using namespace std;
-const int MOD = 1e9+7;
-typedef long long ll;
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdio>
+#include<cmath>
+#include<algorithm>
+#include<cstring>
+#include<cstdlib>
 
-ll n;
+using namespace std;
+
+int n;
+int rk,prob;
+char strname[20];
+char str[20];
+int len;
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin >> n;
-    ll ans=1;
-    ans = 2*(n/11);
-    if(n%11>=7) cout << ans+2;
-    else if(n%11<7 && n%11>0) cout << ans+1;
-    else cout << ans;
-    cout << endl;
+    scanf("%d",&n);
+    for(int m=1;m<=n;m++)
+    {
+        scanf("%d %s %d %s",&rk,strname, &prob, str);
 
+        printf("%3d|%s",rk,strname);
+        for(int i=1;i<=16-strlen(strname);i++) printf(" ");
+        printf("|%d|[",prob);
+        if(strcmp(str,"Running") == 0)
+        {
+            scanf("%d",&len);
+            for(int i=1;i<=len;i++)
+            {
+                printf("X");
+            }
+            for(int i=len+1;i<=10;i++)
+            {
+                printf(" ");
+            }
+            printf("]\n");
+        }
+        else if(strcmp(str, "FB")==0)
+        {
+            printf("    AC*   ]\n");
+        }
+        else
+        {
+            printf("    %s", str);
+            for(int i=0;i<6-strlen(str);i++)
+                printf(" ");
+            printf("]\n");
+
+        }
+    }
     return 0;
 }
-
-
-
-
-
