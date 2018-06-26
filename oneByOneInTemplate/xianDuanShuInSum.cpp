@@ -10,7 +10,7 @@ struct node
 {
 	int l,r,w,f;	// 左右孩子、和、懒标记
 }tree[4*10007 + 7];
-int x,val;
+int x,y,val;
 
 
 /*===================================================
@@ -83,14 +83,31 @@ int sum(int pos)
 
 /*===================================================
 	区间修改
-	输入：修改的区间 x,y(全局)
-	返回：区间和
+	输入：修改的区间 x,y 修改值val(全局) 
+	返回：无
 
 	附属：	down() 懒标记更新
 			f:记录着区间之前的多次更新状况
 ===================================================*/
+int _downUpdate(int pos)
+{
+	int l = tree[pos].l;
+	int r = tree[pos].r;
+	int mid = (l+r)/2;
 
+	tree[2*pos].f += tree[pos].f;
+	tree[2*pos + 1].f += tree[pos].f;
+// Q: 当前的节点权重要加
 
+}
+int update(int pos)
+{
+	if(tree[pos].f != 0)
+		_downUpdate(pos);
+	if(x <= tree[pos].l && tree[pos].r <= y)
+		tree[pos].f += val;
+
+}
 
 int main(int argc, char const *argv[])
 {
