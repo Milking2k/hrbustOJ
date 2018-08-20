@@ -1,74 +1,54 @@
-#include<bits/stdc++.h>
-#define read(x) scanf("%d",&x)
+#include <bits/stdc++.h>
 using namespace std;
-const int maxn=1e5+5;
-map<int,int>mp;
-struct node{
-    int x,num;
-    int sum;
-}d[maxn];
-int c[maxn];
-int lowbit(int x) {
-    return x&(-x);
-}
-int getsum(int x) {
-    int sum=0;
-    while(x >0) {
-        sum+=c[x];
-    }
-    return sum;
-}
-void add(int x,int i) {
-    while(x<maxn) {
-        c[x]+=i;
-        x+=lowbit(x);
-    }
-}
-bool cmp(node a,node b) {
-    if(a.num != b.num) return a.num>b.num;
-    else return a.x<b.x;
-}
-int a[maxn];
-int main() {
-    int T;
-    read(T);
-    while(T--) {
-        int n,m;
-        read(n);
-        read(m);
-        memset(d,0,sizeof(d));
-        mp.clear();
-        for(int i=1;i<=n;i++) {
-            read(a[i]);
-            mp[a[i]]++;
+#define rep(i,a,n) for (int i = a; i<n; i++)
+#define per(i,a,n) for (int i = n-1; i>=a; i--)
+#define pb push_back
+#define mp make_pair
+#define all(now) (now).begin(),(now).end()
+#define fi first
+#define se second
+#define SZ(now) ((int)(now).size())
+typedef vector<int> VI;
+typedef long long ll;
+typedef pair<int,int> PII;
+const ll mod = 1000000007;
+inline int read(int &n){char c=getchar();int x=0,f=1;while(c<'0'||c>'9'){if(c=='-')f=-1;c=getchar();}while(c>='0'&&c<='9'){x=x*10+(c-'0');c=getchar();}return n = x*f;}
+ll powmod(ll a,ll b,ll mod) {ll res = 1; a%=mod; assert(b>=0); for(;b; b>>=1){if(b&1)res = res*a%mod; a = a*a%mod;}return res;}
+ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
+// head
+
+const int N = 1e5+7;
+int T,n,m;
+int sum[N],cnt[N];
+map<int,int> s;
+
+int main()
+{
+    for(read(T);T;T--){
+        read(n),read(m);
+        s.clear();
+        int ans = -1,u;
+        rep(i,1,n+1){
+            read(u);
+            s[u]++;
+            sum[i]=0,cnt[i]=0;
         }
-        map<int,int>::iterator it;
-        int cnt=0;
-        for(it=mp.begin();it!=mp.end();it++) {
-            d[++cnt].x=it->first;
-            d[cnt].num=it->second;
+        for(auto &v : s){
+            sum[v.se] += v.se;
+            cnt[v.se]++;
         }
-        sort(d+1,d+1+cnt,cmp);
-        //cout<<cnt<<endl;
-        int ss=0;
-        for(int i=1;i<=cnt;i++) {
-            d[i].sum+=ss;
-            ss+=d[i].num;
-            //cout<<d[i].num<<" "<<d[i].x<<" "<<d[i].sum<<endl;
+
+        per(i,1,n){
+            sum[i] += sum[i+1];
+            cnt[i] += cnt[i+1];
         }
-        int ans=-1;
-        for(int i=1;i<=cnt;i++) {
-            if(d[i].x < d[i+1].x && d[i].num == d[i+1].num) {
-                continue;
-            }
-            int nn=d[i].sum;
-            nn=nn-(i-1)*(d[i].num-1);
-            //printf("%d nn:%d d[]:%d\n",i,nn,d[i].num-1);
-            //cout<<nn<<" "<<m<<endl;
-            if(nn<=m) {
-                ans=max(ans,d[i].x);
+        for(auto &v:s){
+            int tot = sum[v.se] - (v.se-1)*cnt[v.se] - 1;
+            if(tot <= m){
+                ans = max(ans, v.fi);
             }
         }
         printf("%d\n",ans);
     }
+    return 0;
 }
