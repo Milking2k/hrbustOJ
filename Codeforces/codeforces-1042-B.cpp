@@ -73,7 +73,7 @@ int main()
     res = min(res, 0ll + a[5].top() + a[6].top());
     // cout << res << endl;
     res = min(res, 0ll + a[2].top() + a[5].top());
-    res = min(res, 0ll + a[3].top() + a[5].top());
+    res = min(res, 0ll + a[4].top() + a[5].top());
     // cout << res << endl;
     res = min(res, 0ll + a[3].top() + a[4].top());
     // cout << res << endl;
