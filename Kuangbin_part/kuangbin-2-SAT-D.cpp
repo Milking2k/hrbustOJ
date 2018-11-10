@@ -16,7 +16,6 @@ inline int read(int &n){char c=getchar();int x=0,f=1;while(c<'0'||c>'9'){if(c=='
 ll powmod(ll a,ll b,ll mod) {ll res = 1; a%=mod; assert(b>=0); for(;b; b>>=1){if(b&1)res = res*a%mod; a = a*a%mod;}return res;}
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 // head
-const double EPS = 1e-5;
 int T,n,m;
 
 /*2sat*/
@@ -70,40 +69,49 @@ bool Twosat(int n)
     return true;
 }
 
-struct point{
-    int x, y;
-}s[MAXN];
-double dis(point a, point b){
-    return sqrt((double)(a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y));
+int a[MAXN], b[MAXN], c[MAXN],dep;
+bool solve(int mid)
+{
+    init();
+    rep(i,1,mid+1){
+        if(c[i]==0){
+            addedge(a[i] << 1, b[i] << 1 ^ 1);
+            addedge(b[i] << 1, a[i] << 1 ^ 1);
+        }
+        else if(c[i]==1){
+            addedge(a[i] << 1, b[i] << 1);
+            addedge(b[i] << 1, a[i] << 1);
+            addedge(a[i] << 1 ^ 1, b[i] << 1 ^ 1);
+            addedge(b[i] << 1 ^ 1, a[i] << 1 ^ 1);
+        }
+        else{
+            addedge(a[i] << 1 ^ 1, b[i] << 1);
+            addedge(b[i] << 1 ^ 1, a[i] << 1);
+        }
+    }
+    return Twosat(2*mid);
 }
+
 int main()
 {
-    while(~scanf("%d",&n))
-    {
-        rep(i, 0, n)
-            scanf("%d%d%d%d", &s[2 * i].x, &s[2 * i].y, &s[2 * i + 1].x, &s[2 * i + 1].y);
-
-        double l = 0, r = 40000.0;
-        while(r-l >= EPS){
-            double mid = (l + r) / 2;
-            init();
-            rep(i,0,2*n-2)
-            {
-                int t;
-                if(i%2==0)t=i+2;
-                else t=i+1;
-                rep(j,t,2*n){
-                    if(dis(s[i], s[j]) < 2*mid){
-                        addedge(i, j ^ 1);
-                        addedge(j, i ^ 1);
-                    }
-                }
-            }
-            if(Twosat(2*n))
-                l = mid;
-            else
-                r = mid;
+    for (scanf("%d", &T); T;T--){
+        scanf("%d%d", &n, &m);
+        rep(i,1,m+1){
+            scanf("%d%d%d", &a[i], &b[i], &c[i]);
         }
-        printf("%.2f\n", r);
+        int l = 1, r = m;
+        int ans = 1;
+        while(l<=r){
+            int mid = (l + r) / 2;
+            // printf("mid:%d\n", mid);
+            if(solve(mid)){
+                l = mid+1;
+                if(ans<mid) ans=mid; 
+            }
+            else{
+                r = mid-1;
+            }
+        }
+        printf("%d\n", ans);
     }
 }
