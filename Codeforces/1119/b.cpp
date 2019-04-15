@@ -16,25 +16,50 @@ inline int read(int &n){char c=getchar();int x=0,f=1;while(c<'0'||c>'9'){if(c=='
 ll powmod(ll a,ll b,ll mod) {ll res = 1; a%=mod; assert(b>=0); for(;b; b>>=1){if(b&1)res = res*a%mod; a = a*a%mod;}return res;}
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 // head
-const int N = 1e5+7;
-int T,n,m,Cas=0;
-int a[N];
+const int N = 1e3+7;
+int T,n,m;
+VI a,b;
+
+bool solve(vector<int> b)
+{
+    int len = b.size();
+    int cur = m;
+    int i;
+    for (i = len - 1; i >= 0; i-=2) {
+        cur -= b[i];
+        // printf("::%d %d %d\n",len, b[i], cur);
+        if(cur < 0){
+            return true;
+        }
+    }
+    return false;
+}
+
 int main()
 {
     //ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
-    for (scanf("%d", &T); T; T--){
-        scanf("%d", &n);
-        ll ans = 0;
-        for (int l = 1, r; l <= n;l=r+1){
-            r = n / (n / l);
-            ans += (r - l + 1) * (n / l);
+    cin >> n >> m;
+    rep(i,1,n+1) {
+        int x;
+        cin >> x;
+        a.pb(x);
+    }
+    bool flag = 1;
+    rep(i,0,n){
+        b.pb(a[i]);
+        sort(b.begin(), b.end());
+        // puts("::");
+        if(solve(b)){
+            printf("%d\n", b.size()-1);
+            flag = false;
+            break;
         }
-        // printf("%lld\n", ans);
-        if(ans&1){
-            printf("Case %d: odd\n", ++Cas);
-        }
-        else
-            printf("Case %d: even\n", ++Cas);
+    }
+    if(flag) {
+        printf("%d\n", n);
     }
     return 0;
 }
+/*
+
+*/

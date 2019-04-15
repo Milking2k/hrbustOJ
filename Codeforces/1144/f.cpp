@@ -16,25 +16,49 @@ inline int read(int &n){char c=getchar();int x=0,f=1;while(c<'0'||c>'9'){if(c=='
 ll powmod(ll a,ll b,ll mod) {ll res = 1; a%=mod; assert(b>=0); for(;b; b>>=1){if(b&1)res = res*a%mod; a = a*a%mod;}return res;}
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 // head
-const int N = 1e5+7;
-int T,n,m,Cas=0;
-int a[N];
+const int N = 2e5+7;
+int T,n,m;
+vector<PII> e;
+VI g[N];
+VI color;
+bool ans;
+
+void dfs(int v, int c) {
+    color[v] = c;
+    for (auto to : g[v]) {
+        if(color[to] == -1) {
+            dfs(to, c ^ 1);
+        } else if(color[to] == color[v])
+            ans = false;
+    }
+}
+
 int main()
 {
     //ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
-    for (scanf("%d", &T); T; T--){
-        scanf("%d", &n);
-        ll ans = 0;
-        for (int l = 1, r; l <= n;l=r+1){
-            r = n / (n / l);
-            ans += (r - l + 1) * (n / l);
-        }
-        // printf("%lld\n", ans);
-        if(ans&1){
-            printf("Case %d: odd\n", ++Cas);
-        }
-        else
-            printf("Case %d: even\n", ++Cas);
+    cin >> n >> m;
+    rep(i,0,m) {
+        int x,y;
+        cin >> x >> y;
+        --x,--y;
+        g[x].pb(y);
+        g[y].pb(x);
+        e.pb(mp(x, y));
     }
+    ans = true;
+    color = vector<int>(n, -1);
+    dfs(0, 0);
+    if(!ans) {
+        cout << "NO" << endl;
+        return 0;
+    }
+    cout << "YES\n";
+    rep(i,0,m) {
+        cout << (color[e[i].first] < color[e[i].second]);
+    }
+
     return 0;
 }
+/*
+
+*/

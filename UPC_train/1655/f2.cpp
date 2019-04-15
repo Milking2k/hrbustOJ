@@ -17,24 +17,31 @@ ll powmod(ll a,ll b,ll mod) {ll res = 1; a%=mod; assert(b>=0); for(;b; b>>=1){if
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 // head
 const int N = 1e5+7;
-int T,n,m,Cas=0;
+int T,n,m;
 int a[N];
 int main()
 {
     //ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
-    for (scanf("%d", &T); T; T--){
-        scanf("%d", &n);
-        ll ans = 0;
-        for (int l = 1, r; l <= n;l=r+1){
-            r = n / (n / l);
-            ans += (r - l + 1) * (n / l);
+    // cout << 13 + 2*(sqrt(14) + sqrt(24) + sqrt(8)) << endl;
+    a[0] = 1;
+    a[1] = 2;
+    a[2] = 7;
+    a[3] = 3;
+    int j, k, l;
+    rep(i,0,4){
+        rep(j,0,4){
+            rep(k,0,4){
+                rep(l,0,4){
+                    if (i != j && i != k && i != l && j != k && j != l && k != l){
+                        // printf("%2d %2d %2d %2d %.5f\n", a[i], a[j], a[k], a[l], a[i] + a[l] + 2 * (sqrt(a[i] * a[j]) + sqrt(a[j] * a[k]) + sqrt(a[k] * a[l])));
+                        printf("%2d %2d %2d %2d %.5f\n", a[i], a[j], a[k], a[l], a[i] + a[l] + 2 * (sqrt(a[i] * a[j]) + sqrt(a[j] * a[l])));
+                    }
+                }
+            }
         }
-        // printf("%lld\n", ans);
-        if(ans&1){
-            printf("Case %d: odd\n", ++Cas);
-        }
-        else
-            printf("Case %d: even\n", ++Cas);
     }
     return 0;
 }
+/*
+
+*/

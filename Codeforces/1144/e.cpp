@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i,a,n) for (int i = a; i<n; i++)
-#define per(i,a,n) for (int i = n-1; i>=a; i--)
+#define rep(i,a,n) for (int i = a; i<n; ++i)
+#define per(i,a,n) for (int i = n-1; i>=a; --i)
 #define pb push_back
 #define mp make_pair
 #define all(now) (now).begin(),(now).end()
@@ -17,24 +17,50 @@ ll powmod(ll a,ll b,ll mod) {ll res = 1; a%=mod; assert(b>=0); for(;b; b>>=1){if
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 // head
 const int N = 1e5+7;
-int T,n,m,Cas=0;
+int T,n,m;
 int a[N];
+
+VI solve(const string& s)
+{
+    int len = s.length();
+    VI ret(len + 1);
+    rep(i,0,len) {
+        ret[i + 1] = s[i] - 'a';
+    }
+    return ret;
+}
+
 int main()
 {
     //ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
-    for (scanf("%d", &T); T; T--){
-        scanf("%d", &n);
-        ll ans = 0;
-        for (int l = 1, r; l <= n;l=r+1){
-            r = n / (n / l);
-            ans += (r - l + 1) * (n / l);
+    cin >> n;
+    string ch1, ch2;
+    cin >> ch1 >> ch2;
+    VI a = solve(ch1), b = solve(ch2);
+    int len = ch1.length();
+    per(i, 0, len + 1) {
+        a[i] += b[i];
+        if(i){
+            a[i - 1] += a[i] / 26;
+            a[i] %= 26;
         }
-        // printf("%lld\n", ans);
-        if(ans&1){
-            printf("Case %d: odd\n", ++Cas);
-        }
-        else
-            printf("Case %d: even\n", ++Cas);
     }
+    rep(i, 0, len + 1) {
+        int rem = a[i] % 2;
+        a[i] /= 2;
+        if(i + 1 <= len) {
+            a[i + 1] += rem * 26;
+        }
+    }
+
+    rep(i, 1, len + 1) {
+        cout << char(a[i] + 'a');
+    }
+    cout << endl;
+
+
     return 0;
 }
+/*
+
+*/

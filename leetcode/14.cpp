@@ -26,5 +26,5 @@ int main()
 {
     vector<string> strs = {"flower","fl","flight"};
     cout << longestCommonPrefix(strs) ;
-    return 0;
+    return 0;    
 }

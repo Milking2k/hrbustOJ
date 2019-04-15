@@ -17,24 +17,21 @@ ll powmod(ll a,ll b,ll mod) {ll res = 1; a%=mod; assert(b>=0); for(;b; b>>=1){if
 ll gcd(ll a,ll b) { return b?gcd(b,a%b):a;}
 // head
 const int N = 1e5+7;
-int T,n,m,Cas=0;
+int T,n,m;
 int a[N];
+int dfs(int x)
+{
+    if(x==0) return 1;
+    if(x<10) return x;
+    return max(x % 10 * dfs(x / 10), 9 * dfs(x / 10 - 1));
+}
 int main()
 {
-    //ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
-    for (scanf("%d", &T); T; T--){
-        scanf("%d", &n);
-        ll ans = 0;
-        for (int l = 1, r; l <= n;l=r+1){
-            r = n / (n / l);
-            ans += (r - l + 1) * (n / l);
-        }
-        // printf("%lld\n", ans);
-        if(ans&1){
-            printf("Case %d: odd\n", ++Cas);
-        }
-        else
-            printf("Case %d: even\n", ++Cas);
-    }
+    ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
+    cin>>n;
+    cout << dfs(n);
     return 0;
 }
+/*
+
+*/
